@@ -1,0 +1,61 @@
+{
+    "name": "@simply-justin/react-ws",
+    "version": "0.1.0",
+    "description": "A type-safe WebSocket client implementation for React applications.",
+    "main": "./dist/cjs/index.js",
+    "module": "./dist/esm/index.js",
+    "types": "./dist/esm/index.d.ts",
+    "files": [
+        "dist",
+        "LICENSE",
+        "README.md"
+    ],
+    "scripts": {
+        "build": "npm run build:esm && npm run build:cjs",
+        "build:esm": "tsc",
+        "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+        "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
+        "format": "prettier --write \"{**/*,*}.{js,ts,jsx,tsx}\"",
+        "test": "jest",
+        "prepare": "npm run build",
+        "prepublish": "npm test && npm run lint"
+    },
+    "devDependencies": {
+        "@eslint/eslintrc": "^3.2.0",
+        "@eslint/js": "^9.16.0",
+        "@testing-library/dom": "^10.4.0",
+        "@testing-library/jest-dom": "^6.6.3",
+        "@testing-library/react": "^16.1.0",
+        "@types/jest": "^29.5.14",
+        "@types/node": "^22.10.2",
+        "@types/react": "^19.0.1",
+        "@typescript-eslint/eslint-plugin": "^8.18.0",
+        "@typescript-eslint/parser": "^8.18.0",
+        "eslint": "^9.16.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-jest": "^28.9.0",
+        "eslint-plugin-react": "^7.37.2",
+        "globals": "^15.13.0",
+        "jest": "^29.7.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "prettier": "^3.4.2",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "ts-jest": "^29.2.5",
+        "ts-node": "^10.9.2",
+        "tslib": "^2.8.1",
+        "tsup": "^8.3.5",
+        "typescript": "^5.7.2",
+        "typescript-eslint": "^8.18.0"
+    },
+    "keywords": [
+        "react",
+        "websocket"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/simply-justin/react-ws.git"
+    },
+    "author": "simply-justin",
+    "license": "ISC"
+}
