@@ -1,19 +1,24 @@
 {
     "name": "@simply-justin/react-ws",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "A type-safe WebSocket client implementation for React applications.",
-    "main": "./dist/cjs/index.js",
-    "module": "./dist/esm/index.js",
-    "types": "./dist/esm/index.d.ts",
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "require": "./dist/index.js",
+            "import": "./dist/index.mjs"
+        }
+    },
     "files": [
         "dist",
         "LICENSE",
         "README.md"
     ],
     "scripts": {
-        "build": "npm run build:esm && npm run build:cjs",
-        "build:esm": "tsc",
-        "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+        "build": "tsup",
         "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
         "format": "prettier --write \"{**/*,*}.{js,ts,jsx,tsx}\"",
         "test": "jest",
