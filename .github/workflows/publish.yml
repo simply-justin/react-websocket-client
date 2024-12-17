@@ -1,35 +1,35 @@
 name: Publish package to NPM
 
 on:
-  release:
-    types: [published]
+    release:
+        types: [published]
 
 jobs:
-  build-and-publish:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
-    steps:
-      - name: ⬇️ Checkout repository
-        uses: actions/checkout@v4
+    build-and-publish:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            id-token: write
+        steps:
+            - name: ⬇️ Checkout repository
+              uses: actions/checkout@v4
 
-      - name: 🛠️ Installing PNPM
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
+            - name: 🛠️ Installing PNPM
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 9
 
-      - name: 🛠️ Installing Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
-          registry-url: 'https://registry.npmjs.org'
+            - name: 🛠️ Installing Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: 'pnpm'
+                  registry-url: 'https://registry.npmjs.org'
 
-      - name: 🚀 Setting up dependencies
-        run: pnpm install
+            - name: 🚀 Setting up dependencies
+              run: pnpm install
 
-      - name: 📦 Publishing package to NPM
-        run: pnpm publish --access public --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - name: 📦 Publishing package to NPM
+              run: pnpm publish --access public --no-git-checks
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
