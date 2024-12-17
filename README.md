@@ -22,15 +22,34 @@ npm i @simply-justin/react-ws
 
 ## 🚀 Usage
 
-Inside the layout.(j/t)sx
-```typescript
+```jsx
+// layout.ts
 import { WebsocketClientProvider } from '@simply-justin/react-ws'
-...
 
-<WebsocketClientProvider url='wss://{YOUR_WEBSOCKET_URL}'>
-    {children}
-</WebsocketClientProvider>
+export default function RootLayout({
+    children,
+}: Readonly<{
+    children: React.ReactNode
+}>) {
+  return (
+    <html>
+        <body>
+            <WebsocketClientProvider url='ws://localhost:8080'>
+                {children}
+            </WebsocketClientProvider>
+        </body>
+    </html>
+  )
+}
+```
 
+```jsx
+'use-client'
+import { useWebsocketClient } from '@simply-justin/react-ws'
+
+export default function ExamplePage() {
+    const websocketClient = useWebsocketClient(() => { console.log("I'm getting called on every incomming message.") })
+}
 ```
 
 ## 🤝 Contributing
@@ -41,13 +60,11 @@ Contributions are welcome! To get started:
 2. Run `npm install`
 3. Implement your changes or additions.
 
+For major changes, please [open an issue](https://github.com/simply-justin/react-ws/issues) first to discuss your proposed modifications and make sure to update the tests and documentation as needed.
+
 > [!NOTE]
 > Don't forget to run the tests before submitting a pull request.
 
-For major changes, please [open an issue](https://github.com/simply-justin/react-ws/issues) first to discuss your proposed modifications.
-
-Make sure to update the tests and documentation as needed.
-
 ## 📝 License
 
-This project is licensed under the [MIT License](LICENSE.md).
+This project is licensed under the [MIT License](LICENSE).
