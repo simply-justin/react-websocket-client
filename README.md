@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html>
         <body>
-            <WebsocketClientProvider url='ws://localhost:8080'>
+            <WebsocketClientProvider url='ws://{WEBSOCKET_URL}'>
                 {children}
             </WebsocketClientProvider>
         </body>
