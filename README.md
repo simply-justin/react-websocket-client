@@ -6,6 +6,9 @@ A **type-safe**, lightweight WebSocket client for React. Seamlessly integrate re
 - [Features](#️-features)
 - [Installation](#️-installation)
 - [Usage](#-usage)
+- [API Reference](#-api-reference)
+    - [`WebsocketClientProvider`](#websocketclientprovider)     
+    - [`useWebsocketClient`](#usewebsocketclient)     
 - [Contributing](#-contributing)
 - [Liscense](#-license)
 
@@ -51,6 +54,11 @@ export default function ExamplePage() {
     const websocketClient = useWebsocketClient(() => { console.log("I'm getting called on every incomming message.") })
 }
 ```
+
+## ⚙️ API Reference
+
+#### `WebsocketClientProvider`
+#### `useWebsocketClient`
 
 ## 🤝 Contributing
 
