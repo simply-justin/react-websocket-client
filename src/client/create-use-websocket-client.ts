@@ -1,4 +1,4 @@
-import { Context, useContext, useEffect, useRef } from 'react'
+import React from "react"
 
 /**
  * Creates a custom hook to access the WebSocket client from the provided context.
@@ -8,23 +8,24 @@ import { Context, useContext, useEffect, useRef } from 'react'
  *
  * @throws Will throw an error if used outside the WebsocketClientProvider.
  */
-export function createUseWebsocketClient(WebsocketClientContext: Context<WebSocket | null>) {
+export function createUseWebsocketClient(WebsocketClientContext: React.Context<WebSocket | null>) {
     function useWebsocketClient<T>(events: Record<string, (wsMessage: T) => void>): WebSocket
     function useWebsocketClient<T>(callback: (wsMessage: T) => void, event: string | string[]): WebSocket
+    function useWebsocketClient<T>(callback: (wsMessage: T) => void): WebSocket
 
     function useWebsocketClient<T>(
         arg1: Record<string, (wsMessage: T) => void> | ((wsMessage: T) => void),
         arg2?: string | string[],
     ): WebSocket {
-        const websocketClient = useContext(WebsocketClientContext)
+        const websocketClient = React.useContext(WebsocketClientContext)
 
         if (!websocketClient) throw new Error('`useWebsocketClient` must be used within a `<WebsocketClientProvider>`')
 
-        const multipleEventsRef = useRef<Record<string, (wsMessage: T) => void> | null>(null)
-        const singleCallbackRef = useRef<((wsMessage: T) => void) | null>(null)
-        const eventsRef = useRef<string[] | null>(null)
+        const multipleEventsRef = React.useRef<Record<string, (wsMessage: T) => void> | null>(null)
+        const singleCallbackRef = React.useRef<((wsMessage: T) => void) | null>(null)
+        const eventsRef = React.useRef<string[] | null>(null)
 
-        useEffect(() => {
+        React.useEffect(() => {
             if (typeof arg1 === 'object') {
                 multipleEventsRef.current = arg1 as Record<string, (wsMessage: T) => void>
                 singleCallbackRef.current = null
@@ -36,7 +37,7 @@ export function createUseWebsocketClient(WebsocketClientContext: Context<WebSock
             eventsRef.current = arg2 ? (Array.isArray(arg2) ? arg2 : [arg2]) : null
         }, [arg1, arg2])
 
-        useEffect(() => {
+        React.useEffect(() => {
             function handleIncomingMessageEvent(message: MessageEvent<{ event: string; payload: T }>) {
                 console.log(message)
                 let data: { event: string; payload: T } | null = null

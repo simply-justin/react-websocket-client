@@ -1,7 +1,6 @@
-'use client'
-import { createContext } from 'react'
+import React from 'react'
 import { createUseWebsocketClient } from './create-use-websocket-client'
-import { createWebsocketClientProvider } from './create-websocket-client-provider'
+import { createWebsocketClientProvider, WebsocketProviderProps } from './create-websocket-client-provider'
 
 /**
  * Creates and configures a WebSocket client setup, including context, provider, and custom hooks.
@@ -22,7 +21,7 @@ export function createWebsocketClient() {
      *
      * @type {Context<WebSocket | null>}
      */
-    const WebsocketClientContext = createContext<WebSocket | null>(null)
+    const WebsocketClientContext: React.Context<WebSocket | null> = React.createContext<WebSocket | null>(null)
 
     /**
      * Creates a WebSocket client provider component using the provided context.
@@ -31,7 +30,7 @@ export function createWebsocketClient() {
      *
      * @type {React.FC<WebsocketProviderProps>}
      */
-    const WebsocketClientProvider = createWebsocketClientProvider(WebsocketClientContext)
+    const WebsocketClientProvider: React.FC<WebsocketProviderProps> = createWebsocketClientProvider(WebsocketClientContext)
 
     /**
      * Creates a custom hook to access the WebSocket client from the context.
@@ -44,6 +43,5 @@ export function createWebsocketClient() {
     return {
         useWebsocketClient,
         WebsocketClientProvider,
-        WebsocketClientContext,
     }
 }

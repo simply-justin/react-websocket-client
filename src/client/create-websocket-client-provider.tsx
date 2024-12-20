@@ -1,8 +1,8 @@
-import React, { Context, ReactNode, Suspense, useEffect, useMemo, useRef } from 'react'
+import React from "react"
 
-type WebsocketProviderProps = {
+export type WebsocketProviderProps = {
     readonly url: string
-    readonly children: ReactNode
+    readonly children: React.ReactNode
 }
 
 /**
@@ -11,7 +11,7 @@ type WebsocketProviderProps = {
  * @param WebsocketClientContext - The React Context used to provide the WebSocket client to child components.
  * @returns A higher-order component (HOC) that wraps its children with the WebSocket provider.
  */
-export function createWebsocketClientProvider(WebsocketClientContext: Context<WebSocket | null>) {
+export function createWebsocketClientProvider(WebsocketClientContext: React.Context<WebSocket | null>) {
     /**
      * The WebsocketProvider component initializes the WebSocket client and provides it via context.
      *
@@ -19,13 +19,13 @@ export function createWebsocketClientProvider(WebsocketClientContext: Context<We
      * @returns A context provider wrapping the child components with the WebSocket client.
      */
     function WebsocketProvider({ url, children }: WebsocketProviderProps) {
-        const socketRef = useRef<WebSocket | null>(null)
+        const socketRef = React.useRef<WebSocket | null>(null)
 
         /**
          * Memoizes the WebSocket client instance to prevent unnecessary re-initializations.
          * The client is recreated only when one of the dependencies (`url`) changes.
          */
-        const WebsocketClient = useMemo<WebSocket | null>(() => {
+        const WebsocketClient = React.useMemo<WebSocket | null>(() => {
             if (typeof window === 'undefined') return null
 
             if (socketRef.current) return socketRef.current
@@ -33,7 +33,7 @@ export function createWebsocketClientProvider(WebsocketClientContext: Context<We
             return (socketRef.current = new WebSocket(url))
         }, [url])
 
-        useEffect(() => {
+        React.useEffect(() => {
             // If the WebSocket client is not open, do not proceed.
             if (WebsocketClient?.readyState !== WebSocket.OPEN) return
 
@@ -53,9 +53,9 @@ export function createWebsocketClientProvider(WebsocketClientContext: Context<We
      */
     return function WebsocketProviderWrapper({ url, children }: WebsocketProviderProps) {
         return (
-            <Suspense fallback={<div />}>
+            <React.Suspense fallback={<div />}>
                 <WebsocketProvider url={url}>{children}</WebsocketProvider>
-            </Suspense>
+            </React.Suspense>
         )
     }
 }
