@@ -1,12 +1,18 @@
-# React WS
-
-A **type-safe**, lightweight WebSocket client for React. Seamlessly integrate real-time communication into your React apps with full TypeScript support—no extra tooling or code generation required.
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/simply-justin/react-ws/blob/main/assets/logo.png" />
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/simply-justin/react-ws/blob/main/assets/logo.png" />
+    <img alt="" height="100px" src="https://github.com/simply-justin/react-ws/blob/main/assets/logo.png" />
+  </picture>
+  <br />
+  A <b>type-safe</b>, lightweight WebSocket client for React. Seamlessly integrate real-time communication into your React apps with full TypeScript support—no extra tooling or code generation required.
+</p>
 
 ## Table of Contents
 - [Features](#️-features)
 - [Installation](#️-installation)
 - [Usage](#-usage)
-- [API Reference](#-api-reference)
+- [API Reference](#%EF%B8%8F-api-reference)
     - [`WebsocketClientProvider`](#websocketclientprovider)     
     - [`useWebsocketClient`](#usewebsocketclient)     
 - [Contributing](#-contributing)
@@ -37,7 +43,7 @@ export default function RootLayout({
   return (
     <html>
         <body>
-            <WebsocketClientProvider url='ws://{WEBSOCKET_URL}'>
+            <WebsocketClientProvider url='wss://{WEBSOCKET_URL}'>
                 {children}
             </WebsocketClientProvider>
         </body>
@@ -54,7 +60,6 @@ export default function ExamplePage() {
     const websocketClient = useWebsocketClient(() => { console.log("I'm getting called on every incomming message.") })
 }
 ```
-
 ## ⚙️ API Reference
 
 #### `WebsocketClientProvider`
