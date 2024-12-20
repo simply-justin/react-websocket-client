@@ -1,6 +1,6 @@
 {
     "name": "@simply-justin/react-ws",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "A type-safe WebSocket client implementation for React applications.",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
